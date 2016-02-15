@@ -1579,6 +1579,22 @@
 						background: #ea3723;
 					}
 
+				ul.social li a.fa-instagram {
+					background: #365989;
+				}
+
+					ul.social li a.fa-instagram:hover {
+						background: #5e7aa0;
+					}
+
+				ul.social li a.fa-youtube {
+					background: #b40f0f;
+				}
+
+					ul.social li a.fa-youtube:hover {
+						background: #c33e3e;
+					}
+
 	ol.default {
 		list-style: decimal;
 		padding-left: 1.25em;
@@ -1655,7 +1671,7 @@
 /* Banner */
 
 	#banner {
-		background: #CCE8F4 url("../../images/pic01.jpg");
+		background: #CCE8F4 url("../../images/banner.jpg");
 		background-position: center center;
 		background-size: auto 100%;
 		background-repeat: no-repeat;
