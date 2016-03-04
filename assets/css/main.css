@@ -1154,6 +1154,21 @@
 		margin-bottom: 2em;
 	}
 
+
+	.codebox {
+    /* Below are styles for the codebox */
+    border:1px solid black;
+    background-color:#EEEEEE;
+/*    width: 1em; */
+    overflow:auto;    
+    padding:10px;
+	}
+
+	.codebox code {
+    /* Styles in here affect the text of the codebox */
+    font-size:0.9em;
+	}
+
 /* Form */
 
 	form label {
@@ -1375,6 +1390,17 @@
 		.image img {
 			display: block;
 			width: 100%;
+		}
+
+		.image.body {
+			width: 100%;
+			margin-bottom: -2em;
+
+			/* Caption Text */
+			text-decoration: none;
+			color: grey;
+			text-align: center;
+
 		}
 
 		.image.centered {

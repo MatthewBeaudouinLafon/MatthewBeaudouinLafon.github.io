@@ -43,7 +43,7 @@
 
 								<!-- Sidebar -->
 									<section class="box">
-										<a href="#" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
+										<a href="#" class="image featured"><img src="images/BoardGame.jpg" alt="" /></a>
 										<header>
 											<h3>C++ Board Game</h3>
 										</header>
@@ -58,7 +58,7 @@
 
 								<!-- Content -->
 									<article class="box post">
-										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+										<a href="#" class="image featured"><img src="images/ActualEnigma.jpg" alt="" /></a>
 										<header>
 											<h2>Virtual Enigma Machine</h2>
 <!-- 											<p>Lorem ipsum dolor sit amet feugiat</p>
@@ -67,21 +67,40 @@
 											The <a href="https://en.wikipedia.org/wiki/Enigma_machine" >Enigma </a> is a WWII electromechanical encryption machine used by the German military. 
 										</p>
 										<p>
-											For my International Baccalaureate's Extended Essay, I chose to explore the mathematical aspect of the machine. 
+											For my International Baccalaureate's Extended Essay, I chose to explore the mathematical aspect of the machine. The first step was to understand precisely how the machine works, which was surprisingly difficult. However, that was only a fraction of the battle. Once I learned how to use permutations, I learned how they applied to the Enigma by studying a paper on the subject by Polish mathematician Marian Rejewski. 
 										</p>
 										<section>
 											<header>
 												<h3>Implementation</h3>
 											</header>
 											<p>
-												During my gap year at NYU, I took a class that heavily used MatLab. To get ahead and more familiar with the language, I decided to program the Enigma. 
-												Challenges.
-												MatLab turned out to be a good choice for a language. The algorithm is not very taxing and dealing with permutations is ridiculously easy in MatLab.
+												During my gap year at NYU, I took a class that heavily used MatLab. To get ahead and to become more familiar with the language, I decided to program the Enigma, mostly because I was already familiar with its logical workings.
+												MatLab turned out to be a good choice for a language. The algorithm is not very taxing and dealing with permutations is ridiculously easy in MatLab. For instance, the key line of code that does the computation (most of the rest is wrapping for that line) is this:
+
+												<div class ="codebox">
+												<code>
+												PInum=Int4num(R3num(Int3num(R2num(Int2num(R1num(Int1num(Knum(Pbnum(1:26)))))))));
+												</code>
+												</div>
 											</p>
+
 											<p>
-												Once I had written the code, I thought it would be interesting to make a GUI to use it. I ended up using GUIDE, MatLab's built in GUI maker. 
-												Pic.
+												Every Variable here is a 1x26 vector filled with integers 1 through 26. I am indexing vector after vector, which is precisely the same a composing permutations. I was pretty happy about that. 
 											</p>
+
+											<p>
+												Once I had written the code, I thought it would be interesting to make a GUI to use it. I ended up using GUIDE, MatLab's built in GUI maker. It's pretty awful, but I managed to make it work. It looks like it's from the 90s, the boxes aren't perfectly aligned, but at least it's not a command line. 
+												
+											</p>
+
+											
+											<a class="image body"> <img src="images/VirtualEnigma/GUI.jpg"> <div>Enigma GUI using MatLab's GUIDE</div>  </a>
+
+											<p> 
+												<br> 
+												I like this project a lot because it was my first full-fledged coding project. I'm quite happy with the logical code behind it, but I would have liked to make the GUI less awful. I've decided to leave it at that for the moment to move on to bigger and better things, but I might come back to it to make some visualization tools to understand the Enigma. 
+											</p>
+
 										</section>
 									</article>
 
