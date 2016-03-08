@@ -34,3 +34,7 @@ Credits:
 		Respond.js (j.mp/respondjs)
 		jquery.dropotron (n33.co)
 		Skel (skel.io)
+
+
+Notes: 	- Index titles should be ~ 85 chars
+	- Index pictures should be ~681x472

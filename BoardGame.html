@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Matthew Beaudouin - Virtual Enigma</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="left-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div id="header">
+
+						<!-- Logo -->
+							<h1><a href="index.html">Matthew Beaudouin-Lafon</a></h1>
+
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li class="current"><a href="Engineering.html">Engineering</a></li>
+									<li><a href="Design.html">Design</a></li>
+									<li><a href="Cardistry.html">Cardistry</a></li>
+								</ul>
+							</nav>
+
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="4u 12u(mobile)">
+
+								<!-- Sidebar -->
+									<section class="box">
+										<a href="VirtualEnigma.html" class="image featured"><img src="images/ACtualEnigma.jpg" alt="" /></a>
+										<header>
+											<h3>Virtual Enigma Machine</h3>
+										</header>
+										<p>Using MatLab, I programmed an Enigma machine (WWII cryptographic device) to mimmick the real thing.</p>
+										<footer>
+											<a href="VirtualEnigma.html" class="button alt">Read More</a>
+										</footer>
+									</section>
+
+							</div>
+							<div class="8u 12u(mobile) important(mobile)">
+
+								<!-- Content -->
+									<article class="box post">
+										<a href="#" class="image featured"><img src="images/BoardGame/BoardGameIndex.png" alt="" /></a>
+										<header>
+											<h2>The C++ board game</h2>
+<!-- 											<p>Lorem ipsum dolor sit amet feugiat</p>
+ -->										</header>
+										<p>
+											I took a class in Object Oriented Programming at NYU Poly over my gap year. The following summer, a friend told be of a board game (that he learned from another friend) that I thought gave rise to interesting dynamics. I decided it would be a fun project to bump my C++ proficiency. 
+										</p>
+										
+										<section>
+											<header>
+												<h3>
+													The Name of the Game
+												</h3>
+												<p> Rules and Arising Mechanics </p>
+											</header>
+											<p>
+												Well I actually have no idea what the game is called or where it's from. I learned about it through a friend, who learned it from another friend. I haven't seen it anywhere else, but I'm told that it exists. Anyway, this is how it works: <br>
+
+												There are two players that play turn by turn. The game starts with an empty board, and in the first phase of the game each player sets their pawn in alternation until each has three on the board. The goal is to line up those three pawns on the board (before the other player). This basically can't be done in the first phase since it is painfully obvious when a player is going for three in a row. 
+											</p>
+											
+												<a class="image body"> <img src="images/BoardGame/setPawn.png"> <div>In the first phase, player place their pawn one at a time until each has three on the board.</div> </a> <p></p>
+
+											<p>
+												However, in the second phase each player moves their pawns in alternation. The game becomes interesting as you try to line your pawns while preventing the other player from doing so. Typically, this happens by utilizing the outside of the board where the connection between pawns is less obvious.
+											</p>
+												<a class="image body"> <img src="images/BoardGame/UnfinishedGame.png"> <div>What an unfinished game in the second phase might look like. It appears that the White Pawns have a better chance of winning by agglomerating in the center of the board.</div>  </a><p></p>
+
+											<p>
+												However, you may have noticed some symmetry within the board. The less obvious (but coolest) symmetry is between the inner square and the outer square. You may be able to convince yourself that they are in fact interchangeable and that you can in some way flip the board "inside out". This was one of the reasons I decided to write this game. I build in a button to do this flip to change the player's bias between in inside and the outside of the board.
+
+												<a class="image body"> <img src="images/BoardGame/Flipped.png"> <div>This is logically the exact same board as above. Every pawn that was on the outer square is now on the insideIt is now a lot clearer that both players are in the precise same situation. </div>  </a><p></p>
+
+											<header>
+												<h3>
+													Software Design
+												</h3>
+											</header>
+											<p>
+												With all that fresh Object Oriented knowledge under my belt, I of course tried to apply the finest design to the project. In retrospect, there are a few philosophical issues in that regard. Everything does run swimmingly (up until the AI, but we'll get back to that).
+											</p>
+											<p>
+												You can take a look at the code on <a href="https://github.com/MatthewBeaudouinLafon/UnNamedBoardGame">Github</a>, but here's the general idea. In main.cpp, there's the game loop, which mostly checks for events and calls the relavent classes/functions. 
+											</p>
+											<p>
+												Then there are the classes: Logic keeps track of the board, who's turn it is and all of the Pawns. Position is internally tracked either by a single integer (0 through 24), or as a 3x8 array. The latter is used to do all of the logical computations, mainly checking whether moves are legal. The integer is mainly used when passing position between functions. I don't feel like this is a very elegant solution, and if I were to do this project all over I'd think about this a lot more. The Field and Pawn classes are used for display: the first one shows the window and prints who's turn it is and who wins, while the second figures out where to print the pawns. This means that the pawn's position is tracked in different place, which again, sounds off. For future work, these classes don't need to be touched, so I'm somewhat okay with leaving this as-is. 
+											</p>
+											<p>
+												I used the Simple and Fast Multimedia Library (SFML) for all of the graphics. I was pleasently surprised at how easy it was to used. It almost felt like Python while dealing with the graphics. Though I did have one issue. I had a weird bug where the sprite wouldn't show up for one player. I checked the code for the pawn generation twenty times over, and could not see why the sprites wouldn't load. I tried switching the player's colors, and now the other color had the issue. I tried changing the colors themselves (pretty desperate), which did not help. I even tried to find someone else with a similar issue, hoping SFML wasn't to blame, but no such luck. Finally, I tried explaining the problem to my father, partially so that he could help me out, mostly because I find it helpful to outline the issue to someone else. As I was describing that the vector of pawns should be passed by reference rather than by value to a particular function, and you guessed it, I had it wrong. <br>
+												Here's the kicked though: it shouldn't have worked at all. The pawns shouldn't have been initialized, and they shouldn't have showed up on the board. Yet they did. So after all, it wasn't nearly a graphical glitch. My best hypothesis is that the sprites were at the top of the call stack for that function, which for some reason was only partially deleted by the compiler(???). I may be remembering this somewhat incorrectly, but to make a long story short: partial failure is the worst kind of failure to debug.
+											</p>
+
+											<header>
+												<h3>
+													Playing Against the Compuer (work in progress)
+												</h3>
+											</header>
+
+											<p>
+												Due to the interesting mechanics, I thought that developping an Artificial Intelligence (and I'm using the term quite loosely here) would be a fun exercise. <br>
+												I learned about the <a href="https://en.wikipedia.org/wiki/Minimax">MiniMax algorithm</a> and it seemed perfectly suited for the problem: a player has to chose between at most one of twelve options, often less. Therefore, the tree of possibilities is relatively small compared to other games MiniMax is used for. <br>
+												I'm currently working on implementing the algorithm. I grap it conceptually, but I'm having difficulties with the details of, well, implementation. <br>
+												An important aspect of MiniMax is finding an appropriate evaluation function. The current prototype simply looks at the cartesian distance between pawns: the smaller the better. In the future, I think I can figure out an algorithm to determine the distance between the current pawn position and the closest lineup. The braintwister comes when the other player's pawns are taken into account. In my experience, it isn't too difficult for humans to evaluate a board, so it could be fun to implement a Machine Learning algorithm to learn what constitutes a good board. Regardless I'll get to that once the MiniMax itself works. 
+											</p>
+
+											<header>
+												<h3>
+													Future Work
+												</h3>
+											</header>
+
+											<p>
+												This was a fun project to work on and I've learned a lot about using C++ and general Object Oriented Programming. <br>
+												I really want to get the AI to work at some point, but this project has fallen behind in light of work at Olin. However, once the MiniMax algorithm is correctly implemented, I'll try to compare the different evaluating functions outlined above. <br>
+												After that, I'll plan on learning how to package the code such that people can actually play it! The goal was never really to release a product, but this would be another learning experience. Until then, the source code is available on <a href="https://github.com/MatthewBeaudouinLafon/UnNamedBoardGame">Github</a>, so if you really wanted to you could play it with a friend.
+											</p>
+
+										</section>
+									</article>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Footer -->
+				<div id="footer-wrapper">
+					<section id="footer" class="container">
+						<div class="row">
+						
+						
+						<div class="4u 12u(mobile)">
+							<section>
+								<header>
+									<h2>Background</h2>
+								</header>
+								<a class="image featured"><img src="images/MyFace.jpg" alt="" /></a>
+								<p>
+									I was born and raised in France, spent my freshman and sophomore year of High school in San Francisco and my junior and senior years back in France in an international high schools and earned the International Baccalaureate. I then took a gap year at NYU's School of Engineering and am now a student at Franklin W. Olin College of Engineering. 
+								</p>
+							</section>
+						</div>
+
+						<div class="4u 12u(mobile)">
+								<section>
+									<header>
+										<h2>Contact</h2>
+									</header>
+									<ul class="social">
+										<li><a class="icon fa-facebook" href="https://www.facebook.com/matthew.beaudouin"><span class="label">Facebook</span></a></li>
+										<li><a class="icon fa-linkedin" href="https://www.linkedin.com/in/matthew-beaudouin-lafon-ba92b3112"><span class="label">LinkedIn</span></a></li>
+										<li><a class="icon fa-instagram" href="https://www.instagram.com/mattbeaudouin/"><span class="label">Instagram</span></a></li>
+										<li><a class="icon fa-youtube" href="https://www.youtube.com/channel/UCLHsAYMpoUGcXUPrfozn2JQ"><span class="label">YouTube</span></a></li>
+									</ul>
+									<ul class="contact">
+										<!-- <li>
+											<h3>Address</h3>
+											<p>
+												Untitled Incorporated<br />
+												1234 Somewhere Road Suite<br />
+												Nashville, TN 00000-0000
+											</p>
+										</li> -->
+										<li>
+											<h3>Mail</h3>
+											<p><a href="#">matt.beaudouin@gmail.com</a></p>
+										</li>
+										<!-- <li>
+											<h3>Phone</h3>
+											<p>(800) 000-0000</p>
+										</li> -->
+									</ul>
+								</section>
+							</div>
+						</div>
+						</div>
+						
+						<div class="row">
+							<div class="12u">
+
+								<!-- Copyright -->
+									<div id="copyright">
+										<ul class="links">
+											<li>&copy; Matthew Beaudouin-Lafon. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+										</ul>
+									</div>
+
+							</div>
+						</div>
+					</section>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
