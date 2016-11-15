@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Matthew Beaudouin - MS FingerPaint</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="left-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div id="header">
+
+						<!-- Logo -->
+							<h1><a href="index.html">Matthew Beaudouin-Lafon</a></h1>
+
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li><a href="Engineering.html">Engineering</a></li>
+									<li class="current"><a href="Design.html">Design</a></li>
+									<li><a href="Cardistry.html">Cardistry</a></li>
+								</ul>
+							</nav>
+
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="4u 12u(mobile)">
+
+								<!-- Sidebar -->
+									<section class="box">
+										<a href="EulerTable.html" class="image featured"><img src="images/EulerTable/EulerTableIndex.JPG" alt="Image Not Found" onError="this.onerror=null;this.src='images/ImageLost.png';" /></a>
+										<header>
+											<h3>Euler's Table Exhibit</h3>
+										</header>
+										<p class="box-text">We built a mechanical exhibit exploring Euler's line for Boston's Childrens Museum.</p>
+										<footer>
+											<a href="EulerTable.html" class="button alt">Find out more</a>
+										</footer>
+									</section>
+
+							</div>
+							<div class="8u 12u(mobile) important(mobile)">
+
+								<!-- Content -->
+									<article class="box post">
+										<a href="#" class="image featured"><img src="images/MSFingerPaint/Demo.jpg" alt="Image Not Found" onError="this.onerror=null;this.src='images/ImageLost.png';" /></a>
+										<header>
+											<h2>MS FingerPaint at Hack Holyoke IV</h2>
+										</header>
+										<p>
+											I teamed up with Olin students Alexandre Hoppe, Lauren Gulland and Nathan Yee at Hack Holyoke IV to make the next advancement in MS Paint technology simply dubbed: MS FingerPaint. Using the <a href="https://www.leapmotion.com/">Leap Motion</a>, you can use all of your favorite MS Paint functionalities (specifically: drawing, clearing, changing color and changing size) with simple hand gestures. At last, you can eat you favorite branded chips and draw <i>at the same time</i>. What I'm saying is that the future is here.<br>
+											Ridiculous pitch aside, MS FingerPaint was an exercise in using a technology none of us had played around with before, writing something functional quickly, and most importantly for me, designing an experience with different possibilities and constraints. 
+										</p>
+
+										<iframe width="560" height="315" src="https://www.youtube.com/embed/PR1Lk60Us_s" frameborder="0" allowfullscreen></iframe>
+
+										<section>
+											<header>
+												<h3>Ideation</h3>
+											</header>
+											<p>
+												In preparing for the hackathon, our team had already decided that we wanted to do <i>somthing</i> with a Leap Motion, knowing that Hack Holyoke had a couple available. When hacking started, we threw some ideas around including a sign language translator (which another team ended up doing), a hand gesture based calculator, Tweet Motion (great name, no specific idea attached to it), gesture based password and of course, MS FingerPaint. We didn't just choose the latter because of the great name, but also because it straightforward enough that we could get a minimum viable product early on, and iterate on it throughout the hackathon (as opposed to scrabbling to get anything working).
+											</p>
+
+											<header>
+												<h3>Design</h3>
+											</header>
+											<p>
+											As I said, one of my main focuses for this project was to design the user experience. The first, fairly straightforward, decision I made was to restrict all interactions to hand motion. I didn't want to mix in keyboard and mouse because then it's difficult to think outside of the MS Paint box. Pinching with the right hand (sorry lefties) to draw seemed very natural interaction, and also happened to work very well with the existing Leap Motion library. <br>
+											</p>
+											<p>
+											To change the color, we decided to look at the left hand's orientation. The main benefit is the ability to change the color while drawing (your move MS Paint). The drawbacks are relatively small, but there are a few. First of all, by adding a new hand, the canvas is effectively reduced by left hand occlusion. One solution would be to re-map the drawing space to only the right half, but that diminishes resolution and assumes that the user always wants to be changing color while drawing (otherwise, they’d either keep their hand there or remove it, making half of available space useless). If the user wants to draw single color at a time, they could keep their left hand there (not a great experience), or remove it. However, when they remove their hand the Leap Motion often senses a change in orientation, changing the color. Our solution is to add pinch-to-lock. So once you chose your color, you can pinch to lock the color you chose, and safely move your hand away. Not an optimal experience because it’s another step removed from simplicity, but good enough to solve our problem. <br>
+											Since the mapping from hand rotation to colorspace is arbitrary, we also added visual feedback where MS Paint usually shows color selection (more on that later). Because rotating one’s hand 360 degrees is very mildly comfortable, we mapped the color space to 270 degrees from palm up palm to the left. 
+											</p>
+
+											<iframe width="560" height="315" src="https://www.youtube.com/embed/7d8vOGzAp7s" frameborder="0" allowfullscreen></iframe>
+
+											<p>
+											To clear the screen, the user makes a fist with their right hand, as if they were crumpling the paper. In retrospect, there are a few reason why that was a bad decision. First of all, the natural motion for deleting would have been swiping. In fact, that was my first thought, but between 3 and 4am, while the rest of my team was fast asleep, I made an executive decision against that. For some reason, I liked the idea of crumpling paper, but the decision really came from implementation details. Specifically, I really did not want the user to accidentally delete their drawing by, for example, drawing too quickly. A less sleepy self could have figured out a few safeguards to prevent that, or go so far as to add a confirmation box (swipe again to delete, pinch to keep drawing for example). Instead, I went for the fist clenching, which caused its own problems. As it turns out, pinching and making a fist can be identified as being pretty similar by Leap Motion. Prioritizing pinching ensured that the drawing didn’t get deleted accidentally, but it also made it difficult to delete. In conclusion, making a fist is just not as good as swiping. Though I feel like it was a useful mistake to make and I’ll be able to look back on it in the future when I have similar decisions to make.
+											</p>
+											<p> 
+											Currently, MS FingerPaint is aimed at right-handed people for no other reason than lack of time during the hackathon. But since each hand’s motions are really distinct, nothing is stopping us from detecting dominant hand based on gestures. 
+											</p>
+
+											
+											<header>
+												<h3>Implementation</h3>
+											</header>
+											<p>
+												We wrote MS FingerPaint in python since it was collectively our best language. We used Leap Motion's python library and PyGame for the graphics. You might have expected some crazy stupid implementation with MS Paint but nope, it's just a screenshot. We could have restricted the ability to draw on Paint's canvas, but we found the ability to draw on the UI really funny.  
+											</p>
+
+											<header>
+												<h3>Closing Notes</h3>
+											</header>
+											<p>
+												Above all, this was a really <i>fun</i> project to work on. Our team was really effective at getting work done, making decisions and communicating. I'm also really happy with how our project turned out given the 24 hour constraint. That being said, there are clear improvements to be made. First off, and I know I've discussed this extensively, clearing the drawing should be a swipe (Yes it's really gotten to me). Each point that is drawn should be connected, either by a line or a bezier curve. I didn't touch too much on changing line thickness (mostly because I wasn't in charge of that), but instead of moving left to right, it should be an up-down motion to reduce occlusion. There should be visual feedback on the "UI" for the chosen line thickness. Most importantly, there needs to be a better way for the user to learn how to use the program, which is in itself a fairly difficult UX problem.
+											</p>
+										</section>
+									</article>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Footer -->
+				<div id="footer-wrapper">
+					<section id="footer" class="container">
+						<div class="row">
+
+						<div class="4u 12u(mobile)">
+							<section>
+								<header>
+									<h2>Background</h2>
+								</header>
+								<a class="image featured"><img src="images/MyFace.jpg" alt="" /></a>
+								<p>
+									I was born and raised in France, spent my freshman and sophomore year of High School in San Francisco and my junior and senior years back in France in an international High School and where I earned the International Baccalaureate. I then took a gap year at NYU's School of Engineering and am now a student at Franklin W. Olin College of Engineering. 
+								</p>
+							</section>
+						</div>
+
+						<div class="4u 12u(mobile)">
+								<section>
+									<header>
+										<h2>Contact</h2>
+									</header>
+									<ul class="social">
+										<li><a class="icon fa-facebook" href="https://www.facebook.com/matthew.beaudouin"><span class="label">Facebook</span></a></li>
+										<li><a class="icon fa-linkedin" href="https://www.linkedin.com/in/matthew-beaudouin-lafon-ba92b3112"><span class="label">LinkedIn</span></a></li>
+										<li><a class="icon fa-instagram" href="https://www.instagram.com/mattbeaudouin/"><span class="label">Instagram</span></a></li>
+										<li><a class="icon fa-youtube" href="https://www.youtube.com/channel/UCLHsAYMpoUGcXUPrfozn2JQ"><span class="label">YouTube</span></a></li>
+									</ul>
+									<ul class="contact">
+										<!-- <li>
+											<h3>Address</h3>
+											<p>
+												Untitled Incorporated<br />
+												1234 Somewhere Road Suite<br />
+												Nashville, TN 00000-0000
+											</p>
+										</li> -->
+										<li>
+											<h3>Mail</h3>
+											<p><a href="#">matt.beaudouin@gmail.com</a></p>
+										</li>
+										<!-- <li>
+											<h3>Phone</h3>
+											<p>(800) 000-0000</p>
+										</li> -->
+									</ul>
+								</section>
+							</div>
+						</div>
+						</div>
+
+						
+						<div class="row">
+							<div class="12u">
+
+								<!-- Copyright -->
+									<div id="copyright">
+										<ul class="links">
+											<li>&copy; Matthew Beaudouin-Lafon. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+										</ul>
+									</div>
+
+							</div>
+						</div>
+					</section>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
