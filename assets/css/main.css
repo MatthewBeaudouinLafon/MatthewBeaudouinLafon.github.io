@@ -1308,6 +1308,15 @@
 
 	.box-text {
 		height: 5em;
+		margin-bottom: 0em
+	}
+
+	.box-date {
+		margin-top: 0em;
+		height: 1em;
+		text-align: right;
+		font-style: italic;
+		opacity: 0.4
 	}
 
 /* Button */
