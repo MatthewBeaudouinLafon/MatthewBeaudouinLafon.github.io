@@ -64,9 +64,9 @@
 <!-- 											<p>Lorem ipsum dolor sit amet feugiat</p>
  -->										</header>
 										<p>
-											I took a class in Object Oriented Programming at NYU Poly over my gap year. The following summer, a friend told be of a board game (that he learned from another friend) that I thought gave rise to interesting dynamics. So I decided it would be a fun project to bump my C++ proficiency. 
+											I took a class in Object Oriented Programming at NYU Poly over my gap year. The following summer, a friend told be of a board game (that he learned from another friend) that I thought gave rise to interesting dynamics. So I decided it would be a fun project to bump my C++ proficiency.
 										</p>
-										
+
 										<section>
 											<header>
 												<h3>
@@ -77,9 +77,9 @@
 											<p>
 												Well I actually have no idea what the game is called or where it's from. I learned about it through a friend, who learned it from another friend. I haven't seen it anywhere else, but I've been told that it exists. Anyway, this is how it works: <br>
 
-												There are two players that play turn by turn. The game starts with an empty board, and in the first phase of the game each player sets their pawn in alternation until each has three on the board. The goal is to line up those three pawns on the board (before the other player). This basically can't be done in the first phase since it is painfully obvious when a player is going for three in a row (like in Tic Tac Toe). 
+												There are two players that play turn by turn. The game starts with an empty board, and in the first phase of the game each player sets their pawn in alternation until each has three on the board. The goal is to line up those three pawns on the board (before the other player). This basically can't be done in the first phase since it is painfully obvious when a player is going for three in a row (like in Tic Tac Toe).
 											</p>
-											
+
 												<a class="image body"> <img src="images/BoardGame/setPawn.png"> <div>In the first phase, players place their pawns one at a time until each has three on the board.</div> </a> <p></p>
 
 											<p>
@@ -101,10 +101,10 @@
 												With all that fresh Object Oriented knowledge under my belt, I of course tried to apply the finest design to the project. In retrospect, there are a few philosophical issues in that regard. Everything does run swimmingly (up until the AI, but we'll get back to that).
 											</p>
 											<p>
-												You can take a look at the code on <a href="https://github.com/MatthewBeaudouinLafon/UnNamedBoardGame">Github</a>, but here's the general idea. In main.cpp, there's the game loop, which mostly checks for events and calls the relavent classes/functions. 
+												You can take a look at the code on <a href="https://github.com/MatthewBeaudouinLafon/UnNamedBoardGame">Github</a>, but here's the general idea. In main.cpp, there's the game loop, which mostly checks for events and calls the relavent classes/functions.
 											</p>
 											<p>
-												Then there are the classes: Logic keeps track of the board, who's turn it is and all of the Pawns. Position is internally tracked either by a single integer (0 through 24), or as a 3x8 array. The latter is used to do all of the logical computations, mainly checking whether moves are legal. The integer is mainly used when passing position between functions. I don't feel like this is a very elegant solution, and if I were to do this project all over I'd think about this a lot more. The Field and Pawn classes are used for display: the first one shows the window, the board and prints who's turn it is/who wins, while the second figures out where to print the pawns. This means that the pawn's position is tracked in different place, which again, sounds weird to me. For future work, these classes don't need to be touched, so I'm somewhat okay with leaving this as-is. 
+												Then there are the classes: Logic keeps track of the board, who's turn it is and all of the Pawns. Position is internally tracked either by a single integer (0 through 24), or as a 3x8 array. The latter is used to do all of the logical computations, mainly checking whether moves are legal. The integer is mainly used when passing position between functions. I don't feel like this is a very elegant solution, and if I were to do this project all over I'd think about this a lot more. The Field and Pawn classes are used for display: the first one shows the window, the board and prints who's turn it is/who wins, while the second figures out where to print the pawns. This means that the pawn's position is tracked in different place, which again, sounds weird to me. For future work, these classes don't need to be touched, so I'm somewhat okay with leaving this as-is.
 											</p>
 											<p>
 												I used the Simple and Fast Multimedia Library (SFML) for all of the graphics. I was pleasently surprised at how easy it was to used. It almost felt like Python while dealing with the graphics. Though I did have one issue. I had a weird bug where the sprite wouldn't show up for one player. I checked the code for the pawn generation twenty times over, and could not see why the sprites wouldn't load. I tried switching the player's colors, and now the other color had the issue. I tried changing the colors themselves (pretty desperate), which did not help. I even tried to find someone else with a similar issue, hoping SFML was to blame, but no such luck. Finally, I tried explaining the problem to my father, partially so that he could help me out, mostly because I find it helpful to outline the issue to someone else. As I was describing that the vector of pawns should be passed by reference rather than by value to a particular function,  you guessed it, I realized that I had it wrong. <br>
@@ -121,7 +121,7 @@
 												Due to the interesting mechanics, I thought that developping an Artificial Intelligence (and I'm using the term quite loosely here) would be a fun exercise. <br>
 												I learned about the <a href="https://en.wikipedia.org/wiki/Minimax">MiniMax algorithm</a> and it seemed perfectly suited for the problem: a player has to chose between at most one of twelve options, often less. Therefore, the tree of possibilities is relatively small compared to other games MiniMax is used for (such as chess). <br>
 												I'm currently working on implementing the algorithm. I grasp it conceptually, but I'm having difficulties with the details of, well, implementation. <br>
-												An important aspect of MiniMax is finding an appropriate evaluation function. The current prototype simply looks at the cartesian distance between pawns: the smaller the better. In the future, I think I can figure out an algorithm to determine the distance between the current pawn position and the closest lineup. The braintwister comes when the other player's pawns are taken into account. I might look into modifying <a href="https://en.wikipedia.org/wiki/A*_search_algorithm">A star</a> (a pathfinding algorithm) or merging it with MiniMax. In my experience, it isn't too difficult for humans to evaluate a board, so it could be fun to implement a Machine Learning algorithm to learn what constitutes a good board. Regardless I'll get to that once the MiniMax itself works. 
+												An important aspect of MiniMax is finding an appropriate evaluation function. The current prototype simply looks at the cartesian distance between pawns: the smaller the better. In the future, I think I can figure out an algorithm to determine the distance between the current pawn position and the closest lineup. The braintwister comes when the other player's pawns are taken into account. I might look into modifying <a href="https://en.wikipedia.org/wiki/A*_search_algorithm">A star</a> (a pathfinding algorithm) or merging it with MiniMax. In my experience, it isn't too difficult for humans to evaluate a board, so it could be fun to implement a Machine Learning algorithm to learn what constitutes a good board. Regardless I'll get to that once the MiniMax itself works.
 											</p>
 
 											<header>
@@ -148,8 +148,8 @@
 				<div id="footer-wrapper">
 					<section id="footer" class="container">
 						<div class="row">
-						
-						
+
+
 						<div class="4u 12u(mobile)">
 							<section>
 								<header>
@@ -157,7 +157,7 @@
 								</header>
 								<a class="image featured"><img src="images/MyFace.jpg" alt="" /></a>
 								<p>
-									I was born and raised in France, spent my freshman and sophomore year of High school in San Francisco and my junior and senior years back in France in an international high schools and earned the International Baccalaureate. I then took a gap year at NYU's School of Engineering and am now a student at Franklin W. Olin College of Engineering. 
+									I was born and raised in France where I earned the International Baccalaureate. I took a gap year at NYU's School of Engineering before studying at Franklin W. Olin College of Engineering. Now, I'm figuring out what will happen after that.
 								</p>
 							</section>
 						</div>
@@ -195,7 +195,7 @@
 							</div>
 						</div>
 						</div>
-						
+
 						<div class="row">
 							<div class="12u">
 
