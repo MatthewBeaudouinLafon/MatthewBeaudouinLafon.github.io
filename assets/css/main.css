@@ -1123,6 +1123,7 @@
 	h1, h2, h3, h4, h5, h6 {
 		color: #252122;
 		font-weight: 700;
+		line-height: 1;
 	}
 
 	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -1160,7 +1161,7 @@
     border:1px solid black;
     background-color:#EEEEEE;
 /*    width: 1em; */
-    overflow:auto;    
+    overflow:auto;
     padding:10px;
 	}
 
