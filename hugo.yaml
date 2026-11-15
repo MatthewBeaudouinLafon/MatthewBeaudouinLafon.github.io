@@ -2,6 +2,7 @@ baseURL: "https://frenchmatt.com/"
 title: Matt Beaudouin-Lafon
 paginate: 10
 theme: PaperMod
+publishDir: docs
 
 # Determines what content goes on the front page
 mainsections: ["publications"] #, "projects"]
