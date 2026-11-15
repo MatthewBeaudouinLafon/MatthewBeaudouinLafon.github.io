@@ -1,0 +1,161 @@
+/* NOTE: 
+    The file starts with z so that it gets bundled after the theme CSS,
+    thus overriding it.
+*/
+
+/* NOTE: If you change --main-width, --gap, --sidenote-*, then you need to update
+the sidenote media query too (because you can't use variables in media query
+declarations). The best solution is to use Sass/Scss  */
+:root {
+    --main-width: 800px;
+    --entry-hover: rgb(253, 253, 253);
+    --border: rgb(235, 235, 235);
+    --border-hover: rgb(231, 231, 231);
+    --ambient-shadow: 0px 0px 24px rgba(0, 0, 0, 0.052);
+    --direct-shadow: 4px 4px 8px rgba(0, 0, 0, 0.040);
+    --paper-color: rgb(253, 253, 253);
+}
+
+:root[data-theme=dark] {
+    --entry-hover: rgb(52, 52, 56);
+    --paper-color: rgb(39, 39, 42);
+}
+
+.home {
+    background-color: var(--code-bg);
+}
+
+.home.dark {
+    background-color: var(--theme);
+}
+
+.nav {
+    max-width: calc(var(--main-width) + var(--gap) * 4);
+}
+
+.nav {   
+    a, .logo-switches {
+        opacity: 60%;
+    }
+    
+    a:hover, .logo-switches:hover {
+        opacity: 90%;
+        transition: 0.1s;
+    }
+}
+
+.header-nav {
+    max-width: calc(var(--main-width) + var(--gap) * 4);
+}
+
+.home-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    img {
+        border-radius: 4px;
+    }
+}
+
+.main {
+    max-width: calc(var(--main-width) + var(--gap) * 4);
+    margin: auto;
+    padding-top: calc(2 * var(--gap));
+    padding-bottom: var(--gap);
+    padding-left: calc(4 * var(--gap));
+    padding-right: calc(4 * var(--gap));
+    border-radius: 4px;
+
+    box-shadow: var(--ambient-shadow);
+    background: var(--paper-color);
+}
+
+.dark {
+    .main {
+        background: var(--paper-color);
+    }
+}
+
+.post-content a,
+.entry-content a {
+    /* For some reason the theme uses some wacky box shadow nonsense to underline,
+    so disable that. */
+    box-shadow: none;
+
+    text-decoration: underline;
+    text-underline-offset: 1.5px;
+}
+
+.entry-content {
+    -webkit-line-clamp: 3;
+}
+
+.post-entry {
+    display: flex;
+    gap: var(--gap);
+
+    box-shadow: var(--ambient-shadow), var(--direct-shadow);
+
+    margin-left: calc(-1 * var(--gap));
+    margin-right: calc(-1 * var(--gap));
+    transition-property: box-shadow;
+    transition-duration: 1s;
+
+    .thumbnail {
+        outline: 1px solid var(--border);
+        max-height: 140px;
+        aspect-ratio: 1 / 1;
+    }
+}
+
+
+.post-entry:active {
+    /* disable transform from theme */
+    transform: none
+}
+
+.post-entry:hover {
+    background: var(--entry-hover);
+    box-shadow:
+        0px 0px 10px rgba(0, 0, 0, 0.075) inset;
+}
+
+.archive-entry {
+    border-radius: var(--radius);
+    padding-left: 12px;
+    transition: 0.1s
+}
+
+.archive-entry:hover {
+    background-color: var(--code-bg);
+}
+
+details summary {
+    width: auto;
+}
+
+/* --main-width - (2 * --gap) */
+@media screen and (max-width: 768px) {
+    .home-info {
+        flex-direction: column;
+
+        img {
+            width: 80%;
+            margin-bottom: var(--gap);
+        }
+    }
+
+    .post-entry {
+        flex-direction: column;
+        /* TODO: Figure out how to center the thumbnail on mobile */
+        align-content: flex-start;
+        /* flex-wrap: wrap;
+        align-content: center; */
+
+        .thumbnail {
+            max-height: fit-content;
+        }
+    }
+
+}

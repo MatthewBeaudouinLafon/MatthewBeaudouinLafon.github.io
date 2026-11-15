@@ -1,0 +1,34 @@
+.collapsible {
+    --border-color: oklch(from var(--code-bg) calc(0.9 * (l - 0.5) + 0.5) c h);
+
+    background-color: var(--code-bg);
+    padding: 0.75em 1em;
+    border-radius: var(--radius);
+    outline: var(--border-color) 2px solid;
+    margin: 2em 0em;
+}
+
+.collapsible-header {
+    background-color: var(--code-bg);
+
+    /* I would like to appologize for the following CSS crimes */
+    margin: -0.8em -1em 0.2em;
+    padding: 1em 1em 0;
+}
+
+.collapsible[open] {
+    background-color: oklch(from var(--paper-color) calc(0.9 * (l - 0.5) + 0.5) c h);
+}
+
+.collapsible[open] .collapsible-header {
+    border-bottom: solid thin var(--border-color);
+    padding-bottom: 0.8em;
+}
+
+.collapsible-body {
+    margin-top: 0.75em;
+}
+/* TODO: customize the triangle to look better.
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details#customizing_the_disclosure_widget
+https://stackoverflow.com/questions/10813581/can-i-replace-the-expand-icon-of-the-details-element
+*/

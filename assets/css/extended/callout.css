@@ -1,0 +1,7 @@
+.callout {
+    background-color: var(--code-bg);
+    padding: 0.75em 1em;
+    border-radius: var(--radius);
+    outline: oklch(from var(--code-bg) calc(0.9 * (l - 0.5) + 0.5) c h) 2px solid;
+    margin: 2em 0em;
+}

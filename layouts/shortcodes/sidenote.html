@@ -1,0 +1,20 @@
+{{ .Page.Scratch.Add "numbernote-id" 1 }}
+{{ $id := .Page.Scratch.Get "numbernote-id" }}
+
+<!-- can add a manual vertical offset to deal with overlapping side notes. Parameter should be em string/ -->
+{{ $offsetDistance := (.Get "offset") | default 0}}
+<span class="sidenote">
+    <input class="sidenote-checkbox" type="checkbox" id="numbernote-{{ $id }}"></input>
+    <label class="sidenote-label" for="numbernote-{{ $id }}">{{ $id }}</label>
+    <span class="sidenote-content sidenote-right" style="margin-top:calc(-1.5em + {{$offsetDistance}})">
+        <span class="sidenote-delimiter">[note:</span>
+        <!-- option 1 -->
+        <!-- <label class="sidenote-label" for="numbernote-{{ $id }}" style="margin-right: 2px;" > {{ $id }}</label>
+        {{ .Inner }} -->
+
+        <!-- option 2 -->
+        {{ $id }}. {{ .Inner | markdownify }}
+
+        <span class="sidenote-delimiter">]</span>
+    </span>
+</span>
